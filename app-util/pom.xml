@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>app-util</groupId>
+    <artifactId>app-util</artifactId>
+    <packaging>jar</packaging>
+    <version>0.1</version>
+    <name>app-util</name>
+
+    <parent>
+        <groupId>net.app</groupId>
+        <artifactId>app</artifactId>
+        <version>0.1</version>
+    </parent>
+
+    <properties>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <lambda.logging.version>1.0.1</lambda.logging.version>
+        <logback.version>1.3.0-alpha4</logback.version>
+        <lombok.version>1.16.20</lombok.version>
+        <net.spy.version>2.12.3</net.spy.version>
+    </properties>
+
+    <dependencies>
+
+        <dependency>
+            <groupId>net.app.core</groupId>
+            <artifactId>app-core</artifactId>
+            <version>0.1</version>
+        </dependency>
+
+        <!-- Logging dependencies -->
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>${logback.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
+        </dependency>
+
+        <!-- AWS SSM Store -->
+        <dependency>
+            <groupId>com.amazonaws</groupId>
+            <artifactId>aws-java-sdk-ssm</artifactId>
+            <version>1.11.290</version>
+        </dependency>
+
+        <!-- AWS SNS Client -->
+        <!-- https://mvnrepository.com/artifact/com.amazonaws/aws-java-sdk-sns -->
+        <dependency>
+            <groupId>com.amazonaws</groupId>
+            <artifactId>aws-java-sdk-sns</artifactId>
+            <version>1.11.290</version>
+        </dependency>
+
+        <!-- Memcached Client -->
+        <!-- https://mvnrepository.com/artifact/net.spy/spymemcached -->
+        <dependency>
+            <groupId>net.spy</groupId>
+            <artifactId>spymemcached</artifactId>
+            <version>${net.spy.version}</version>
+        </dependency>
+
+
+    </dependencies>
+
+</project>

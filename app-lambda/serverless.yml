@@ -1,0 +1,57 @@
+service: aws-java-sample
+
+frameworkVersion: ">=1.2.0 <2.0.0"
+
+custom:
+  configFile: ${file(./config/${self:provider.stage}.yml)}
+
+provider:
+  name: aws
+  runtime: java8
+  stage: ${opt:stage, 'dev'}
+  region: 'us-east-2'
+
+  versionFunctions: false
+  logRetentionInDays: 30
+
+  environment:
+        APNS_BASE_ARN: ${self:custom.configFile.APNS_BASE_ARN}
+        GCM_BASE_ARN: ${self:custom.configFile.GCM_BASE_ARN}
+
+        ELASTICACHE_CONFIGURATION_ENDPOINT: ${self:custom.configFile.ELASTICACHE_CONFIGURATION_ENDPOINT}
+        MEMCACHED_DEFAULT_TTL_VALUE: ${self:custom.configFile.MEMCACHED_DEFAULT_TTL_VALUE}
+
+  iamRoleStatements: # permissions for all of your functions can be set here
+        - Effect: Allow
+          Action:
+            - kms:Decrypt
+          Resource: ${self:custom.configFile.KMS_KEY}
+        - Effect: Allow
+          Action:
+            - sns:*
+          Resource: "arn:aws:sns:*:*:*"
+        - Effect: Allow
+          Action:
+            - apigateway:*
+          Resource: "*"
+
+package:
+  artifact: target/app-lambda-0.1.jar
+
+functions:
+  currentTime:
+    name: ${self:provider.stage}-example
+    description: Example http endpoint that returns current time.
+    handler: net.app.lambda.example.ExampleHanlder
+    memorySize: 512
+    timeout: 30
+    events:
+      - http:
+          path: ping
+          method: get
+  notification:
+    name: ${self:provider.stage}-notification
+    description: Notifications example for iOS and Android Devices.
+    handler: net.app.lambda.notification.NotificationHandler
+    memorySize: 512
+    timeout: 30

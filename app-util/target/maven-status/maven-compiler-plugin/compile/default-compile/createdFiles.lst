@@ -1,0 +1,5 @@
+net/app/util/aws/SNSMessageGenerator.class
+net/app/util/aws/SNSMessageGenerator$1.class
+net/app/util/aws/ElasticCache.class
+net/app/util/aws/SNSPlatform.class
+net/app/util/aws/SNSClient.class

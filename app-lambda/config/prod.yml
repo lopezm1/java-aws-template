@@ -1,0 +1,10 @@
+version: "1.1.0"
+region: "us-east-2"
+profile: "default"
+
+APNS_BASE_ARN: ${ssm:/PROD/services/sns-apns-development}
+GCM_BASE_ARN: ${ssm:/PROD/services/sns-gcm-development}
+
+KMS_KEY: ${ssm:/PROD/security/default-kms-key}
+ELASTICACHE_CONFIGURATION_ENDPOINT: ${ssm:/PROD/services/memcached/connection-url}
+MEMCACHED_DEFAULT_TTL_VALUE: "604800"
