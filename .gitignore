@@ -1,0 +1,66 @@
+### Gradle ###
+**/.gradle*
+**/gradle*
+build/
+.gradletasknamecache
+
+# Ignore Gradle GUI config
+gradle-app.setting
+
+
+### Eclipse ###
+*.pydevproject
+.metadata
+bin/
+tmp/
+*.tmp
+*.bak
+*.swp
+*~.nib
+local.properties
+.settings/
+.loadpath
+.project
+.classpath
+.springBeans
+
+# External tool builders
+.externalToolBuilders/
+
+# Locally stored "Eclipse launch configurations"
+*.launch
+
+### Java ###
+*.class
+
+# Mobile Tools for Java (J2ME)
+.mtj.tmp/
+
+# Package Files #
+*.jar
+*.war
+*.ear
+
+### Intellij ###
+# Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm
+
+*.iml
+.idea/
+
+## File-based project format:
+*.ipr
+*.iws
+
+out/
+
+**/target*
+
+**.DS_Store
+
+# Serverless directories
+.serverless
+
+**/.DS_STORE
+
+# Visual Studio Code
+.vscode/
