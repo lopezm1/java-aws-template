@@ -45,12 +45,16 @@ local.properties
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm
 
 *.iml
+.idea
+.idea/**
 
 ## File-based project format:
 *.ipr
 *.iws
 
 out/
+
+**/target*
 
 **.DS_Store
 

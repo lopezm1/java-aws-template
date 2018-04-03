@@ -10,6 +10,7 @@ provider:
   runtime: java8
   stage: ${opt:stage, 'dev'}
   region: 'us-east-2'
+  profile: personal
 
   versionFunctions: false
   logRetentionInDays: 30
@@ -42,7 +43,7 @@ functions:
   currentTime:
     name: ${self:provider.stage}-example
     description: Example http endpoint that returns current time.
-    handler: net.app.lambda.example.ExampleHanlder
+    handler: net.app.lambda.example.ExampleHandler
     memorySize: 512
     timeout: 30
     events:
