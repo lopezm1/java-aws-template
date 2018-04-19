@@ -7,9 +7,6 @@ import net.spy.memcached.MemcachedClient;
 import java.io.IOException;
 import java.net.InetSocketAddress;
 
-// The CacheManager class implements the lazy caching approach to populate
-// the cache and retrieve items from cache
-
 /**
  * CacheManager for Memcahched Client.
  */
@@ -27,16 +24,18 @@ public class ElasticCache implements ICacheManager {
     private static ElasticCache elasticCache;
     private static MemcachedClient memcachedClient;
 
+    /* Private Constructor */
+
     private ElasticCache() {
         try {
             memcachedClient = new MemcachedClient(new InetSocketAddress(CLUSTER_CONFIG_ENDPOINT, CLUSTER_CONFIG_ENDPOINT_PORT));
-        } catch(IOException ioe) {
+        } catch (IOException ioe) {
             log.error("Error constructing MemcachedClient " + ioe.getMessage());
         }
     }
 
-    public static ElasticCache getInstance(){
-        if(elasticCache == null) {
+    public static ElasticCache getInstance() {
+        if (elasticCache == null) {
             elasticCache = new ElasticCache();
         }
         return elasticCache;
@@ -45,35 +44,51 @@ public class ElasticCache implements ICacheManager {
     /**
      * Retrieve value from cache for the given- key
      *
-     * @param key   Key of the value to get
-     * @return      Value of the key
+     * @param key Key of the value to get
+     * @return Value of the key
      */
     @Override
     public Object getCacheItem(String key) {
         Object valueFromCache = null;
-        valueFromCache = memcachedClient.get(key);
+
+        try {
+            valueFromCache = memcachedClient.get(key);
+        } catch (IllegalArgumentException e) {
+            log.warn("Cache Item Not Retrieved - %s", e.getMessage());
+        }
+
         return valueFromCache;
     }
 
     /**
      * Store the given key-value pair in cache
      *
-     * @param key     Key of the value to set
-     * @param value   The value of the key to set
+     * @param key   Key of the value to set
+     * @param value The value of the key to set
      */
     @Override
     public void setCacheItem(String key, Object value) {
-        memcachedClient.set(key, DEFAULT_TTL_VALUE, value);
+        try {
+            memcachedClient.set(key, DEFAULT_TTL_VALUE, value);
+        } catch (IllegalArgumentException e) {
+            log.warn("Cache Item Not Set - %s", e.getMessage());
+        }
     }
 
     /**
      * Store the given key-value pair in cache
      *
-     * @param key     Key of the value to set
-     * @param TTL     Time-To-Live value of cached value
-     * @param value   The value of the key to set
+     * @param key   Key of the value to set
+     * @param TTL   Time-To-Live value of cached value
+     * @param value The value of the key to set
      */
     @Override
-    public void setCacheItem(String key, int TTL, Object value) { memcachedClient.set(key, TTL, value); }
+    public void setCacheItem(String key, int TTL, Object value) {
+        try {
+            memcachedClient.set(key, TTL, value);
+        } catch (IllegalArgumentException e) {
+            log.warn("Cache Item Not Set - %s", e.getMessage());
+        }
+    }
 }
 

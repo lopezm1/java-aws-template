@@ -1,6 +1,4 @@
-version: "1.1.0"
-region: "us-east-2"
-profile: "default"
+region: "us-west-2"
 
 APNS_BASE_ARN: ${ssm:/DR/services/sns-apns-development}
 GCM_BASE_ARN: ${ssm:/DR/services/sns-gcm-development}
